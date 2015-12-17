@@ -1,7 +1,7 @@
 Disclaimer:
 ================
 
-This repository is a fork detached of the following project: https://github.com/nexr/RHive
+This repository is a fork detached of the following project: https://github.com/Mu-Sigma/RImpala
 
 
 Due to the inactivity of the projects or ignoring my comments/fixes I decided to separate the development in a separate Github project, why not forked? Because fork apparently do not appear in searches and if anyone has problems with outdated versions will make it more difficult to find.
