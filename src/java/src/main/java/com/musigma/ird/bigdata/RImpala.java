@@ -321,22 +321,14 @@ public class RImpala {
 			return null;
 		} else {
 			try {
-
 				Statement stmt = con.createStatement();
-             	    		
 				stmt.setFetchSize(Integer.parseInt(fetchSize));
-
 				rs = stmt.executeQuery(Q);
-
 				List < String[] > dynamicResult = new ArrayList < String[] > ();
-
 				ResultSetMetaData metaData = rs.getMetaData();
-
 				int columnCount = metaData.getColumnCount();
 
-
 				//System.out.println("Number of Columns :"+columnCount);
-
 
 				String[] columnTypes = new String[columnCount];
 				String[] columnNames = new String[columnCount];
@@ -346,28 +338,21 @@ public class RImpala {
 					columnNames[j - 1] = metaData.getColumnName(j);
 					columnTypes[j - 1] = metaData.getColumnTypeName(j);
 				}
-
 				dynamicResult.add(columnNames);
 				dynamicResult.add(columnTypes);
-
-
 				while (rs.next()) {
-
 					String[] dynamicRow = new String[columnCount];
-
 					for (int i = 1; i <= columnCount; i++) {
-
-						dynamicRow[i - 1] = rs.getObject(i).toString();
+						if(rs.getObject(i) != null) dynamicRow[i - 1] = rs.getObject(i).toString();
+						else dynamicRow[i - 1] = null;
 					}
 					dynamicResult.add(dynamicRow);
-
-
 				}
 				return dynamicResult;
 
 			} catch (SQLException e) {
 
-				System.out.println("Error: " + e.getMessage());
+				System.out.println("Error 1: " + e.getMessage());
 
 			} catch (Exception e) {
 				//e.printStackTrace();
@@ -377,7 +362,7 @@ public class RImpala {
 					System.out.println("Please use rimpala.connect(IP= ,port= )");
 				}
 
-				System.out.println("Error: " + e.getMessage());
+				System.out.println("Error 2: " + e.getMessage());
 
 			} finally {
 
